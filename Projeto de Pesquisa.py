@@ -108,6 +108,36 @@ def comparacao_ias():
     for i, (ia, usuarios) in enumerate(ordenado, 1):
         print(f"{i:2}: {ia:23}: {usuarios:8}:")
 
+def comparacao_usuarios():
+    titulo("Comparação de Usuários de IA por Gênero")
+    print("N.: Gênero....: Usuários: Não-Usuários:")
+    
+    grupo = {}
+    
+    for linha in estudantes:
+        genero = linha["gender"]
+        usuarios = 0
+        non_usuarios = 0
+        for estudante in estudantes:
+            if estudante['gender'] == genero:
+                if estudante['primary_ai_tools_used'] == 'None':
+                    non_usuarios += 1
+                else:
+                    usuarios += 1
+        grupo[genero] = (usuarios, non_usuarios)
+    
+    if grupo[genero] == "Male":
+        grupo[genero] = "Masculino"
+    elif grupo[genero] == "Female":
+        grupo[genero] = "Feminino"
+    elif grupo[genero] == "non-binary":
+        grupo[genero] = "Não-Binário"
+    
+    ordenado = sorted(grupo.items(), key=lambda x: x[1][0], reverse=True)
+    
+    for i, (genero, (usuarios, non_usuarios)) in enumerate(ordenado, 1):
+        print(f"{i:2}: {genero:10}: {usuarios:8}: {non_usuarios:12}:")
+
 while True:
     titulo("Menu Principal")
     print("1. Apresenta os Estudante em Ordem de Idade")
@@ -127,5 +157,10 @@ while True:
         limpar_tela()
         comparacao_ias()
     
+    elif opcao == "3":
+        limpar_tela()
+        comparacao_usuarios()
+    
     else:
+        limpar_tela()
         break
