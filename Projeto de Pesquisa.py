@@ -1,6 +1,5 @@
 import csv
 import os
-import time
 import subprocess
 
 estudantes = []
@@ -41,6 +40,8 @@ def ordena_jovens():
     for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados[:10], 1):
         print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
     
+    limpar_tela()
+    
     todos = input("Deseja ver todos? (s/n): ")
     if todos.lower() == "s":
         for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados, 1):
@@ -65,6 +66,8 @@ def ordena_velhos():
     
     for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados[:10], 1):
         print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
+    
+    limpar_tela()
     
     todos = input("Deseja ver todos? (s/n): ")
     if todos.lower() == "s":
@@ -117,9 +120,11 @@ while True:
     opcao = input("Opção: ")
     
     if opcao == "1":
+        limpar_tela()
         ordem_Idade()
     
     elif opcao == "2":
+        limpar_tela()
         comparacao_ias()
     
     else:
