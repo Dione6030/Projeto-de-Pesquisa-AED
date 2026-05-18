@@ -39,12 +39,12 @@ def ordena_jovens():
     ordenados = sorted(grupo.items(), key=lambda x: x[1][0])
     
     for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados[:10], 1):
-        print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:6}: {grau_estudo:12}: {habitacao:10}")
+        print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
     
     todos = input("Deseja ver todos? (s/n): ")
     if todos.lower() == "s":
         for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados, 1):
-            print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:6}: {grau_estudo:12}: {habitacao:10}")
+            print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
 
 def ordena_velhos():
     titulo("Ordem dos Mais Velhos")
@@ -64,12 +64,12 @@ def ordena_velhos():
     ordenados = sorted(grupo.items(), key=lambda x: x[1][0], reverse=True)
     
     for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados[:10], 1):
-        print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:6}: {grau_estudo:12}: {habitacao:10}")
+        print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
     
     todos = input("Deseja ver todos? (s/n): ")
     if todos.lower() == "s":
         for i, (estudante_id, (idade, genero, grau_estudo, habitacao)) in enumerate(ordenados, 1):
-            print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:6}: {grau_estudo:12}: {habitacao:10}")
+            print(f"{i:2}. {estudante_id:12}: {idade:5}: {genero:10}: {grau_estudo:12}: {habitacao:10}")
 
 def ordem_Idade():
     titulo("Menu de Apresentação")
