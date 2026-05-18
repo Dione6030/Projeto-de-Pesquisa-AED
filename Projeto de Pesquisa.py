@@ -85,6 +85,26 @@ def ordem_Idade():
         print("Opção Inválida")
         return
 
+def comparacao_ias():
+    titulo("Comparação de IAs Mais Usadas")
+    print("N.: Inteligencia Artificial: Usuários:")
+    
+    grupo = {}
+    
+    for linha in estudantes:
+        if linha['primary_ai_tools_used'] != 'None':
+            ia = linha['primary_ai_tools_used']
+        usuarios = 0
+        for estudante in estudantes:
+            if estudante['primary_ai_tools_used'] == ia:
+                usuarios += 1
+        grupo[ia] = usuarios
+    
+    ordenado = sorted(grupo.items(), key=lambda x: x[1], reverse=True)
+    
+    for i, (ia, usuarios) in enumerate(ordenado, 1):
+        print(f"{i:2}: {ia:23}: {usuarios:8}:")
+
 while True:
     titulo("Menu Principal")
     print("1. Apresenta os Estudante em Ordem de Idade")
@@ -98,6 +118,9 @@ while True:
     
     if opcao == "1":
         ordem_Idade()
+    
+    elif opcao == "2":
+        comparacao_ias()
     
     else:
         break
