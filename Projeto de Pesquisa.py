@@ -191,41 +191,26 @@ def operacoes_com_zonas_e_graus():
 
 def grafico_pizza():
     
-    usuarios_chatgpt = set()
-    for col in estudantes:
-        if col['primary_ai_tools_used'] == 'ChatGPT':
-            usuarios_chatgpt.add(col['student_id'])
-    chatgpt = len(usuarios_chatgpt)
+    dataframe = pd.DataFrame(estudantes)
     
-    usuarios_gemini = set()
-    for col in estudantes:
-        if col['primary_ai_tools_used'] == 'Gemini':
-            usuarios_gemini.add(col['student_id'])
-    gemini = len(usuarios_gemini)
+    contagem = (
+        dataframe['primary_ai_tools_used']
+        .replace('None', pd.NA)
+        .dropna()
+        .value_counts()
+        .reset_index()
+    )
     
-    usuarios_claude = set()
-    for col in estudantes:
-        if col['primary_ai_tools_used'] == 'Claude':
-            usuarios_claude.add(col['student_id'])
-    claude = len(usuarios_claude)
+    contagem.columns = ["IA", "Usuários"]
     
-    usuarios_perplexity = set()
-    for col in estudantes:
-        if col['primary_ai_tools_used'] == 'Perplexity':
-            usuarios_perplexity.add(col['student_id'])
-    perplexity = len(usuarios_perplexity)
+    fig = px.pie(
+        contagem,
+        names="IA",
+        values="Usuários",
+        title="Distribuição de Usuários por IA"
+    )
     
-    usuarios_copilot = set()
-    for col in estudantes:
-        if col['primary_ai_tools_used'] == 'GitHub Copilot':
-            usuarios_copilot.add(col['student_id'])
-    copilot = len(usuarios_copilot)
-    
-    print(f'ChatGPT: {chatgpt}')
-    print(f'Gemini: {gemini}')
-    print(f'Claude: {claude}')
-    print(f'Perplexity: {perplexity}')
-    print(f'GitHub Copilot: {copilot}')
+    fig.show()
 
 def grafico_media():
     
