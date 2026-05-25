@@ -2,6 +2,7 @@ import csv
 import os
 import subprocess
 import time
+import plotly.express as px
 
 estudantes = []
 
@@ -187,6 +188,44 @@ def operacoes_com_zonas_e_graus():
         print(f"3º Grau: {len(rurais_tier3)} Alunos")
         time.sleep(5)
 
+def grafico_pizza():
+    
+    usuarios_chatgpt = set()
+    for col in estudantes:
+        if col['primary_ai_tools_used'] == 'ChatGPT':
+            usuarios_chatgpt.add(col['student_id'])
+    chatgpt = len(usuarios_chatgpt)
+    
+    usuarios_gemini = set()
+    for col in estudantes:
+        if col['primary_ai_tools_used'] == 'Gemini':
+            usuarios_gemini.add(col['student_id'])
+    gemini = len(usuarios_gemini)
+    
+    usuarios_claude = set()
+    for col in estudantes:
+        if col['primary_ai_tools_used'] == 'Claude':
+            usuarios_claude.add(col['student_id'])
+    claude = len(usuarios_claude)
+    
+    usuarios_perplexity = set()
+    for col in estudantes:
+        if col['primary_ai_tools_used'] == 'Perplexity':
+            usuarios_perplexity.add(col['student_id'])
+    perplexity = len(usuarios_perplexity)
+    
+    usuarios_copilot = set()
+    for col in estudantes:
+        if col['primary_ai_tools_used'] == 'GitHub Copilot':
+            usuarios_copilot.add(col['student_id'])
+    copilot = len(usuarios_copilot)
+    
+    print(f'ChatGPT: {chatgpt}')
+    print(f'Gemini: {gemini}')
+    print(f'Claude: {claude}')
+    print(f'Perplexity: {perplexity}')
+    print(f'GitHub Copilot: {copilot}')
+
 while True:
     titulo("Menu Principal")
     print("1. Apresenta os Estudante em Ordem de Idade")
@@ -213,6 +252,10 @@ while True:
     elif opcao == "4":
         limpar_tela()
         operacoes_com_zonas_e_graus()
+    
+    elif opcao == "5":
+        limpar_tela()
+        grafico_pizza()
     
     else:
         limpar_tela()
