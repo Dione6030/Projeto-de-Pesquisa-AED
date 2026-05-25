@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 import plotly.express as px
+import pandas as pd
 
 estudantes = []
 
@@ -226,6 +227,27 @@ def grafico_pizza():
     print(f'Perplexity: {perplexity}')
     print(f'GitHub Copilot: {copilot}')
 
+def grafico_media():
+    
+    dataframe = pd.DataFrame(estudantes)
+    
+    dataframe['age'] = dataframe["age"].astype(int)
+    
+    dataframe_medias = dataframe.groupby('college_tier', as_index=False)['age'].mean()
+    
+    dataframe_medias = dataframe_medias.sort_values(by='college_tier')
+    
+    fig = px.line(
+        dataframe_medias,
+        x='college_tier',
+        y='age',
+        title='Média de Idade por Grau de Estudo',
+        labels={'college_tier': 'Grau de Estudo', 'age': 'Média de Idade'},
+        markers=True
+    )
+    
+    fig.show()
+
 while True:
     titulo("Menu Principal")
     print("1. Apresenta os Estudante em Ordem de Idade")
@@ -256,6 +278,10 @@ while True:
     elif opcao == "5":
         limpar_tela()
         grafico_pizza()
+    
+    elif opcao == "6":
+        limpar_tela()
+        grafico_media()
     
     else:
         limpar_tela()
